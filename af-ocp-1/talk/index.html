@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>Devtalk - OCP, del 1</title>
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Devtalk - OCP, del 1</h1>
+					<p>Mina Demian, Consid</p>
+				</section>
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+							## Agenda
+							1. Kolla på att deploya en frontend applikation på *två* olika sätt
+							2. Gå igenom OCP CLI kommandon
+							---
+							## Prep
+							1. Hämta ner [repo](rabbit) om du vill följa med och testa samtidigt
+							2. Se till att `oc` är installerad och du är inloggad på ditt eget projekt.
+							---
+							## Regler
+							1. Det finns inga regler.
+						</textarea>
+					</section>
+				</section>
+				<section>
+					<h2>Metod 1: BuildConfig</h2>
+					<p>Vi går i genom vår BuildConfig fil och medföljande tooling</p>
+				</section>
+					<section>
+						<section>
+							<h2>Metod 2: <code>Nodeshift</code></h2>
+						</section>
+						<section>
+							<h2>Några punkter:</h2>
+							<ol>
+								<li>Funkar inte så bra på Windows. Man måste installera Visual Studio.</li>
+								<li>Documentation till nodeshift är sådär. Tålamod och uthållighet gäller!</li>
+							</ol>
+						</section>
+						<section data-markdown>
+							<section data-markdown>
+								<textarea data-template>
+									## Installation
+									1. (yarn | npm) install npx
+									2. npx nodeshift
+									---
+									## Prep
+									```npm
+									npx nodeshift
+										--strictSSL=false
+										--dockerImage=nodeshift/ubi8-s2i-web-app
+										--build.recreate=buildConfig 
+										--build.incremental=true
+										--build.strategy=source
+										--build.env
+											OUTPUT_DIR=dist/experiment-fe
+											YARN_ENABLED=true
+										--expose 
+										--web-app
+									```
+									---
+									## Resultat?
+								</textarea>
+							</section>
+						</section>
+					</section>
+				</section>
+			</div>
+		</div>
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			Reveal.initialize({
+				hash: true,
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>

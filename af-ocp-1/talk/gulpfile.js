@@ -265,7 +265,7 @@ gulp.task('eslint', () => gulp.src(['./js/**', 'gulpfile.js'])
 
 gulp.task('test', gulp.series( 'eslint', 'qunit' ))
 
-gulp.task('default', gulp.series(gulp.parallel('js', 'css', 'plugins'), 'test'))
+gulp.task('default', gulp.series(gulp.parallel('js', 'css', 'plugins')))
 
 gulp.task('build', gulp.parallel('js', 'css', 'plugins'))
 
@@ -278,7 +278,7 @@ gulp.task('package', gulp.series('default', () =>
         './images/**',
         './plugin/**',
         './**.md'
-    ]).pipe(zip('reveal-js-presentation.zip')).pipe(gulp.dest('./'))
+    ]).pipe(zip('talk.zip')).pipe(gulp.dest('./'))
 
 ))
 
